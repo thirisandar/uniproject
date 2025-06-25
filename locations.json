@@ -1,0 +1,185 @@
+{
+    "Maharaungmyay": {
+        "coffee": [
+            {"name": "Arrow", "lat": 21.959126694285963, "lng": 96.08914611002241, "address": "60x124St", "image": "/static/images/cafe1.jpg"}, 
+            {"name": "Because", "lat": 21.958408488315175, "lng": 96.11541069468059, "address": "60St, 40x41St", "image": "/static/images/cafe2.jpg"}, 
+            {"name": "Bless Row", "lat": 21.959874189245234, "lng": 96.11737943885784, "address": "59x40A St", "image": "/static/images/cafe3.jpg"}, 
+            {"name": "Buzz", "lat": 21.959016847201205, "lng": 96.11115021047463, "address": "62Ax40St", "image": "/static/images/cafe4.jpg"}, 
+            {"name": "Cafe Deep", "lat": 21.95984813713018, "lng": 96.098563621668, "address": "71x40ASt", "image": "/static/images/cafedeep.jpg"}, 
+            {"name": "Cafe Day", "lat": 21.961781292847988, "lng": 96.09537549882964, "address": "41x72St", "image": "/static/images/cafeday.jpg"}, 
+            {"name": "Coffee9", "lat": 21.9651571310413, "lng": 96.07591189468087, "address": "38St,84x85", "image": "/static/images/cafe9.jpg"}, 
+            {"name": "Coffee Per Second", "lat": 21.95558739206273, "lng": 96.1084272276638, "address": "64St,41x42", "image": "/static/images/cafedeep.jpg"}, 
+            {"name": "Degree Ice Cafe", "lat": 21.9677124263534, "lng": 96.11063085235178, "address": "35x63St", "image": ""}, 
+            {"name": "Forest", "lat": 21.94228286515806, "lng": 96.1096289926805, "address": "63St,106x107", "image": "/static/images/forest.jpg"}, 
+            {"name": "Fresh Brewed", "lat": 21.96096869356105, "lng": 96.0991611853358, "address": "70x40St", "image": "/static/images/freshb.jpg"}, 
+            {"name": "Friends", "lat": 21.96400233418698, "lng": 96.09450451002257, "address": "73St,38x39", "image": "/static/images/friend.jpg"}, 
+            {"name": "Fresh", "lat": 21.961663694013335, "lng": 96.09810932043622, "address": "41St,70x71", "image": "/static/images/fresh.jpg"}, 
+            {"name": "Goffee Coffee", "lat": 21.954519207194323, "lng": 96.10966605465089, "address": "63x42St", "image": "/static/images/goffee.jpg"}, 
+            {"name": "HubMoon", "lat": 21.953888295075213, "lng": 96.1021787081741, "address": "68x42St", "image": "/static/images/hub.jpg"}, 
+            {"name": "Hugo", "lat": 21.963931133139095, "lng": 96.10841953700992, "address": "64St,37x38", "image": "/static/images/hugo.jpg"}, 
+            {"name": "Kamea", "lat": 21.956158590837326, "lng": 96.10508723885772, "address": "68St,41x42", "image": "/static/images/kamea.jpg"}, 
+            {"name": "Lush", "lat": 21.961122288010007, "lng": 96.10908853885795, "address": "39x64St", "image": "/static/images/lush.jpg"}, {"name": "Shwe Lab San", "lat": 24.27010605474998, "lng": 94.81395701011078, "address": "41x65St", "image": "/static/images/shwelab.jpg"}, 
+            {"name": "Tag", "lat": 21.95562080018541, "lng": 96.11481176584505, "address": "60ASt,41x42", "image": ""}, 
+            {"name": "Teaology", "lat": 21.96123158761477, "lng": 96.10623909901216, "address": "73x39", "image": "/static/images/teaology.jpg"}, 
+            {"name": "That Shop", "lat": 21.960476095135945, "lng": 96.0954657104749, "address": "73St,40x41", "image": "/static/images/thatshop.jpg"},
+            {"name": "The Burma Road", "lat": 21.957531892855197, "lng": 96.10461239468059, "address": "41St,66x67", "image": "/static/images/theburma.jpg"}, 
+            {"name": "The Dream", "lat": 21.962432986313864, "lng": 96.0812850081744, "address": "81St,39x40", "image": ""}, 
+            {"name": "Moe Wai Kyaw", "lat": 21.966172379463185, "lng": 96.07985796584546, "address": "64St,40x41", "image": "/static/images/moew.jpg"}, 
+            {"name": "Paw Oo", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "58St,40x41", "image": "/static/images/pawoo.jpg"}, 
+            {"name": "Shal Tea", "lat": 21.96735409742126, "lng": 96.09510914232911, "address": "Adipadili Roadx36st", "image": "/static/images/default.png"}, 
+            {"name": "Story", "lat": 21.943778500000015,"lng":  96.09385615767087, "address": "56St,36x37", "image": "/static/images/storycafe.jpg"}, 
+            {"name": "Tea Time", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "61Ax42St", "image": "/static/images/teatime.jpg"}
+            ], 
+        "restaurant": [
+             {"name": "Aye Myittar", "lat": 21.967495347264386,"lng": 96.08173110184809, "address": "81St,36x37", "image": "/static/images/ayemyittar.jpg"}, 
+             {"name": "Shan Ma Ma", "lat": 21.9716018369877,"lng": 96.08196798650633, "address": "81x34St", "image": "/static/images/shanmama.jpg"}, 
+             {"name": "Super 81", "lat": 21.963689602784555, "lng": 96.08140515767091, "address": "81St, 38x39", "image": "/static/images/super81.jpg"},
+             {"name": "Royal Mandalay", "lat": 21.973147379022716, "lng": 96.10191581349368, "address": "32St,68x69", "image": "/static/images/royalmdy.jpg"}, 
+             {"name": "Golden Palace", "lat": 21.725961568618718 , "lng": 94.67829925767089, "address": "Myan Nanda(3)St", "image": "/static/images/goldenpalace.jpg"}, 
+             {"name": "Ge Ge House", "lat": 21.96450390175799, "lng": 96.1097174, "address": "63x64St, 37x38", "image": "/static/images/gege.jpg"}, 
+             {"name": "Anyarthu", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "41St,70x71", "image": "/static/images/anyarthu.jpg"}, 
+             {"name": "Imperial", "lat": 21.960584158600117,"lng": 96.11018142698734, "address": "39St,63", "image": "/static/images/imperial.jpg"}, 
+             {"name": "VH", "lat": 21.9652673313219,"lng": 96.10631272536436, "address": "37Stx64", "image": "/static/images/vh.jpg"},
+             {"name": "Aung Family", "lat": 21.95475936956134,"lng": 96.08642444602529, "address": "42St,81x82", "image": "/static/images/aung.jpg"}, 
+             {"name": "Su Pang Lai", "lat": 21.962478057058014, "lng": 96.10490779999999, "address": "66x67St,38x39St", "image": "/static/images/supaing.jpg"}, 
+             {"name": "Tar Moe Kyaw", "lat": 21.96762449900482,"lng":  96.12321325767088, "address": "35St,56x55", "image": "/static/images/tarmoe.jpg"}, 
+             {"name": "Lashio Shan", "lat": 21.963988602973313, "lng": 96.08348873068351, "address": "80St, 38x39", "image": "/static/images/lashio.jpg"}, 
+             {"name": "White House", "lat": 21.97287853215248, "lng": 96.09039814048107, "address": "76St,32x33", "image": "/static/images/whitehouse.jpg"}, 
+             {"name": "Triangle", "lat": 21.97285149219537, "lng": 96.08176212883544, "address": "33St,81x82", "image": "/static/images/triangle.jpg"}
+            ], 
+        "bookstore": [
+            {"name": "Family", "lat": 21.94675488627283,"lng":  96.07509661349368, "address": "Sagaing lan kwaexMdyshwebo Road", "image": "/static/images/family.jpg"},
+            {"name": "Glory Children", "lat": 21.935178931606835, "lng": 96.13341168118609, "address": "35St,71x72", "image": "/static/images/glory.jpg"} 
+
+            ], 
+        "hotel": [
+            {"name": "Mingalar Mandalay", "lat": 21.94179460985308, "lng": 96.09241968650629, "address": "73Stx107", "image": "/static/images/mingalar.jpg"}, 
+            {"name": "Shwe Ingyin", "lat": 21.977169731877574, "lng": 96.08721324602529, "address": "30Stx78", "image": "/static/images/shweingyin.jpg"}, 
+            {"name": "Yadanar Yoma Inn", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "41St,78x79", "image": "/static/images/yadanar.jpg"}, 
+            {"name": "79 Living", "lat": 21.978037273523586, "lng": 96.0850861986017, "address": "79St,29x30", "image": "/static/images/79living.jpg"}, 
+            {"name": "Y-Mandalay", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "53St,37B", "image": "/static/images/ymandalay.jpg"}
+            ]
+        }, 
+    "Chanmyathazi": 
+        {
+          "coffee": 
+          [
+            {"name": "Tea house", "lat": 21.956717096724464, "lng": 96.13261236633568, "address": "48Stx110", "image": "/static/images/default.jpg"}, 
+            {"name": "Goodi Coffee", "lat": 21.956717096724464, "lng": 96.12243947792938, "address": "108AStx55", "image": "/static/images/goodi.jpg"}, 
+            {"name": "One Tiramisu", "lat": 21.956717096724464, "lng": 96.11759167790916, "address": "58Stx111", "image": "/static/images/oneti.jpg"}, 
+            {"name": "Zero", "lat": 21.932846208526747, "lng": 96.11701234907282, "address": "58Stx110", "image": "/static/images/zero.jpg"}, 
+            {"name": "Zero degree", "lat": 21.93878444680119, "lng": 96.11611736441819, "address": "59Stx107", "image": "/static/images/zdegree.jpg"}, 
+            {"name": "Common", "lat": 21.93505222795351, "lng": 96.11410242209082, "address": "60Stx109", "image": "/static/images/common.jpg"}, 
+            {"name": "Shadow", "lat": 21.939331674531324, "lng": 96.10864251857463, "address": "107Stx64", "image": "/static/images/shadow.jpg"}, 
+            {"name": "La Fika", "lat": 21.947401452869865, "lng": 96.1110464067455, "address": "62StxThazin St", "image": "/static/images/lafika.jpg"}, 
+            {"name": "Himawari", "lat": 21.934500789258887, "lng": 96.11186167790916, "address": "109A,61x62", "image": "/static/images/himawari.jpg"}, 
+            {"name": "Vietline", "lat": 21.958808781182245, "lng": 96.10512746441817, "address": "66St,41x42", "image": "/static/images/vietline.png"}, 
+            {"name": "Tealogy", "lat": 21.933122204324366, "lng": 96.1127697676982, "address": "109St,61x62", "image": "/static/images/tealogy.jpg"}, 
+            {"name": "Forest", "lat": 21.94070226649525, "lng": 96.10940900674551, "address": "63St,106x107", "image": "/static/images/forestc.jpg"}, 
+            {"name": "Our hour", "lat": 21.945201744540313, "lng": 96.10866229325451, "address": "63x64St,Khattar", "image": "/static/images/outhour.jpg"}, 
+            {"name": "The Regent", "lat": 21.949878351404827, "lng": 96.10596746441817, "address": "65St,101x102", "image": "/static/images/regent.jpg"}, 
+            {"name": "What's up", "lat": 21.944108036414075, "lng": 96.1041798932545, "address": "66St,104x105", "image": "/static/images/whatisup.jpg"}, 
+            {"name": "Casa Deva", "lat": 21.950850792376244, "lng": 96.10319896441817, "address": "67StxTheik Pan", "image": "/static/images/casa.jpg"}, 
+            {"name": "Legal Cafe", "lat": 21.94856174136578, "lng": 96.10174216256382, "address": "68Stx102", "image": "/static/images/legal.jpg"}, 
+            {"name": "Story Coffee", "lat": 21.964660976794484, "lng": 96.12223295278149, "address": "53St,36x37", "image": "/static/images/story.png"}
+        ], 
+        "restaurant": [
+            {"name": "Mingalarbar", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "71St,29x28", "image": "/static/images/mingalarbar.jpg"}, 
+            {"name": "Yamato Japan Ramen", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "63St,41x42", "image": "/static/images/yamato.jpg"}, 
+            {"name": "Han Guk Korean BBQ", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "63St,105x106", "image": "/static/images/hanguk.jpg"}, 
+            {"name": "Shan Yin Yin", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "62St,35x36", "image": "/static/images/shan.jpg"}, 
+            {"name": "Space Bar", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "62St,35x36", "image": "/static/images/spacebar.jpg"}, 
+            {"name": "M One Camping", "lat": 21.956717096724464, "lng": 96.12172901554108, "address": "38Stx57", "image": "/static/images/mone.jpg"}, 
+            {"name": "Mandalay Seafood", "lat": 21.963380161044043, "lng": 96.11839002166792, "address": "101St,55x56", "image": "/static/images/mandalay.jpg"},
+            {"name": "INC Japanese", "lat":  21.96362317729288, "lng": 96.10832520490275, "address": "64St,37x38", "image": "/static/images/inc.jpg"}, 
+            {"name": "The Container Bar", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "68St,32x33", "image": "/static/images/container.jpg"}, 
+            {"name": "The Tropical Bar", "lat": 21.972081566989957, "lng": 21.972081566989957, "address": "63St,32x33", "image": "/static/images/tropical.jpg"}, 
+            {"name": "HANA Yakiniku Japanese BBQ", "lat": 21.980747053690035, "lng": 96.10328869140767, "address": "27St,68x69", "image": "/static/images/mingalarbar.jpg"}, 
+            {"name": "Kun  BBQ", "lat": 21.960222680745908, "lng": 96.12045150674754, "address": "57St,39x40", "image": "/static/images/kun.jpg"}
+        ], 
+        "bookstore": [
+            {"name": "Moe Kaung Kin", "lat": 21.93733058008347, "lng": 96.10443670859235, "address": "66St,108x109", "image": "/static/images/moe.jpg"}], 
+        "hotel": [
+            {"name": "Grand Park", "lat": 21.96265617735683, "lng": 96.07633452024263, "address": "84St,39x40", "image": "/static/images/grand.jpg"}, 
+            {"name": "Hotel Sakura Princess", "lat":  21.97243911427732, "lng": 96.10426312208743, "address": "67St,32x33", "image": "/static/images/sakura.jpg"},
+            {"name": "City Grand", "lat": 21.952941740874017, "lng":  96.10490219140765, "address": "66St,42xTheik Pan St", "image": "/static/images/city.jpg"}, 
+            {"name": "Holiday Pier", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "78St,Kwel sel kan(2)St", "image": "/static/images/holiday.jpg"}
+             ], 
+        "shopping": [
+            {"name": "Central Point", "lat": 21.933983468570492, "lng": 96.11112056441748, "address": "62Stx110", "image": "/static/images/central.jpg"}, 
+            {"name": "Fuji", "lat":  21.93089123016334, "lng": 96.11000900490276, "address": "62Stx111", "image": "/static/images/fuji.jpg"}, 
+            {"name": "Ocean", "lat": 21.941696796154254, "lng": 96.09268296257268, "address": "73Stx107", "image": "/static/images/ocean.jpg"}, 
+            {"name": "The Move", "lat": 21.941047658933837, "lng": 96.09266083558249, "address": "73Stx107", "image": "/static/images/move.jpg"}
+        ]
+    }, 
+        "Chanayetharzan": {
+            "coffee": 
+             [
+                {"name": "Taiwan Tea", "lat": 21.974897267420992,"lng": 96.09663225055442, "address": "72St,33x34", "image": "/static/images/taiwan.jpg"}, 
+                {"name": "32 coffee home", "lat": 21.971497067624124, "lng": 96.0952845965884, "address": "32St,73x74", "image": "/static/images/32.jpg"}, 
+                {"name": "Brew", "lat": 21.973672462745323, "lng":96.09213193335647, "address": "73Stx32A", "image": "/static/images/brew.jpg"}, 
+                {"name": "Cafe Ordinary", "lat": 21.9713403716622, "lng": 96.07672713891604, "address": "34St,84x85", "image": "/static/images/cafeo.jpg"},
+                {"name": "Cafe vibes", "lat":21.982429296531222, "lng": 96.10081103706317, "address": "26Stx70", "image": "/static/images/cafev.jpg"}, 
+                {"name": "Coffee King", "lat": 21.970144524374415, "lng": 96.07493222171807, "address": "35St,85x86", "image": "/static/images/coffeeking.jpg"}, 
+                {"name": "Coffee Lab", "lat": 21.972672216367272,"lng":  96.07211969473526, "address": "86St,33x34", "image": "/static/images/coffeelab.jpg"}, 
+                {"name": "Coffee Time", "lat": 21.973983767585775, "lng": 96.09179768124378, "address": "75St,31x32", "image": "/static/images/default.jpg"}, 
+                {"name": "Good Morning", "lat": 21.977624916041137, "lng": 96.07963972357152, "address": "68Stx31", "image": "/static/images/good.jpg"}, 
+                {"name": "Light", "lat": 21.972344970112992, "lng": 96.1192892524075, "address": "32St,58x59", "image": "/static/images/light.jpg"}, 
+                {"name": "Man Dagun", "lat": 21.931055953331466, "lng": 96.1009822352083, "address": "68Stx111", "image": "/static/images/default.jpg"}, 
+                {"name": "Monday", "lat": 21.98069580415298,"lng":  96.10531821008017, "address": "27St,66x67", "image": "/static/images/monday.jpg"}, 
+                {"name": "Moon", "lat": 21.972825074169247, "lng": 96.09377706589905, "address": "32ASt,73x74", "image": "/static/images/moon.jpg"}, 
+                {"name": "My home", "lat": 21.979306315905742, "lng": 96.08979059473539, "address": "26St,76x77", "image": "/static/images/myhome.jpg"}, 
+                {"name": "My tree", "lat": 21.9826268519292, "lng": 96.0947271100802, "address": "26St,73x74", "image": "/static/images/mytree.png"}, 
+                {"name": "Orla", "lat": 21.97084897309684,"lng": 96.10258228124368, "address": "40St,62x63", "image": "/static/images/orla.jpg"}, 
+                {"name": "Superb", "lat": 21.97836666428931,"lng": 96.07745075240771, "address": "84Stx30", "image": "/static/images/superb.jpg"},
+                {"name": "Utopia", "lat": 21.968655370690005, "lng": 96.1305165355819, "address": "51Stx34", "image": "/static/images/utopia.jpg"}, 
+                {"name": "Vega", "lat": 21.970048021700727, "lng": 96.09120740822658, "address": "75St,34x35", "image": "/static/images/vega.jpg"}, 
+                {"name": "Vitenam coffee house", "lat": 21.974155768460697, "lng":96.09442979288204, "address": "31St,73x74", "image": "/static/images/viet.jpg"}
+                ], 
+            "restaurant": [
+                {"name": "Eighteen", "lat": 21.95080174988595, "lng": 96.10470947975737, "address": "66St,101x102", "image": "/static/images/eight.jpg"}, 
+                {"name": "Unique Mandalay", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "35Stx64", "image": "/static/images/uni.jpg"}, 
+                {"name": "My beer BBQ", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "58St,42x43", "image": "/static/images/mybeer.jpg"}, 
+                {"name": "Shwe Li City", "lat": 21.95982638460316, "lng": 96.11897475092238, "address": "59St,42x43", "image": "/static/images/shweli.jpg"}, 
+                {"name": "Royal Class Bar", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "64St,38x39", "image": "/static/images/royal.jpg"}, 
+                {"name": "The Garden BBQ", "lat": 21.973827060359167, "lng": 96.10790475092239, "address": "65St,31x32", "image": "/static/images/garden.jpg"}, 
+                {"name": "Min Mahar", "lat": 21.94640291276387, "lng": 96.12149499334559, "address": "35Stx56", "image": "/static/images/min.jpg"}, 
+                {"name": "AIKO restaurant", "lat": 21.97680425935457, "lng": 96.1126829490776, "address": "62St,29x30", "image": "/static/images/aiko.jpg"}, 
+                {"name": "Unique Myanmar", "lat": 21.967793722171777, "lng": 96.10865035092237, "address": "27x65St", "image": "/static/images/unique.jpg"},
+                {"name": "Old Skool BBQ", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "35St,58x59", "image": "/static/images/old.jpg"}
+                ], 
+            "bookstore": [
+                {"name": "Aung Hsu Pan Law", "lat":  21.95805918738736, "lng": 96.10130836441749, "address": "69St,41x42", "image": "/static/images/aunghsu.jpg"},
+                {"name": "Innwa", "lat": 22.05213770790597, "lng":  96.0888308729293, "address": "28St,73x74", "image": "/static/images/innwa.jpg"}
+                ], 
+            "hotel": [
+                {"name": "Palace", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "80St,32x33", "image": "/static/images/palace.jpg"}, 
+                {"name": "Dream", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "27St,81x82", "image": "/static/images/dream.jpg"}, 
+                {"name": "Hotel Queen", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "81St,32x33", "image": "/static/images/hotelq.jpg"}, 
+                {"name": "Hotel New Wave", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "80St,26x27", "image": "/static/images/new.jpg"}, 
+                {"name": "Ostello Bello Mandalay", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "74Stx28", "image": "/static/images/ost.jpg"}, 
+                {"name": "Hotel Yadanarbon", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "31St,76x77", "image": "/static/images/hotely.JPG"}, 
+                {"name": "Hotel Apex", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "35St,58x59", "image": "/static/images/apex.jpg"}, 
+                {"name": "Hotel Sahara", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "80St,26x27", "image": "/static/images/sahara.jpg"}, 
+                {"name": "Hotel Nova", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "352St,26x27", "image": "/static/images/nova.jpg"}, 
+                {"name": "Kantel Hotel", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "30St,64x65", "image": "/static/images/kantel.jpg"}, 
+                {"name": "Orient", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "27St,79x80", "image": "/static/images/orient.jpg"}, 
+                {"name": "Ease", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "30St,64x65", "image": "/static/images/ease.jpg"}, 
+                {"name": "Royal Pearl", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "29St,80x81", "image": "/static/images/pearl.jpg"}, 
+                {"name": "The Home", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "85St,32x33", "image": "/static/images/home.jpg"}, 
+                {"name": "Hotel Boss", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "26St,91x92", "image": "/static/images/boss.jpg"}, 
+                {"name": "Royal Power", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "80St,27x28", "image": "/static/images/power.jpg"}, 
+                {"name": "Hotel Shwe Pyi Thar", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "26BSt,92x93", "image": "/static/images/shweh.jpg"}, 
+                {"name": "Royal Peacook", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "83St,22x23", "image": "/static/images/peacook.jpg"}, 
+                {"name": "Sunset Palace View", "lat": 21.956717096724464, "lng": 96.11839002166792, "address": "22Stx66", "image": "/static/images/sunset.jpg"}
+            ], 
+            "shopping": [
+                {"name": "Capital Center", "lat": 21.980704266154103, "lng":  96.08414355092243, "address": "80St,27x28", "image": "/static/images/capital.jpg"}, 
+                {"name": "Diamond Plaza", "lat": 21.971861913602627, "lng":  96.08716359325246, "address": "78Stx35", "image": "/static/images/plaza.jpg"}, 
+                {"name": "Yadanarbon Market", "lat": 21.971839271434366, "lng": 96.08809920652517, "address": "77Stx33", "image": "/static/images/ya.jpg"}, 
+                {"name": "Zay Cho Plaza", "lat": 21.982890352976977, "lng": 96.07726940674756, "address": "85St,26x27", "image": "/static/images/zaycho.jpg"},
+                {"name": "78 Central Point", "lat":  21.973136012137445, "lng":  96.08683352024265, "address": "77x78St,32x33", "image": "/static/images/78.jpg"}
+                   
+            ]
+        }
+    }

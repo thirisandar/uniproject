@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Admin Dashboard</title>
+</head>
+<style type="text/css">
+     @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+    body{
+        
+        font-family: "Roboto Condensed", sans-serif;
+        font-optical-sizing: auto;
+        position: relative;
+        overflow-y:  auto;
+    }
+    
+    h2{
+        text-align: center;
+        font-size: 30px;
+        color:  rgb(199, 130, 130);
+        font-weight: 450;
+        word-spacing: 5px;
+        letter-spacing: 3px;
+        text-shadow: 1.3px 1px #000;
+    }
+
+    .logoutbtn{
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        background-color: steelblue;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        padding: 12px 30px;
+        cursor: pointer;
+        
+    }
+
+    .logoutbtn:hover{
+        background-color: #000;
+        color: #fff;
+    }
+
+    h3{
+        text-align: center;
+        font-size: 26px;
+        
+        font-weight: 500;
+        word-spacing: 5px;
+        margin-top: 30px;
+    }
+
+    .locations{
+        text-align: center;
+        font-size: 23px;
+        margin-top: 5%;
+    }
+
+    #filterForm{
+        
+        position: absolute;
+        left: 20%;
+
+        margin-bottom: 90px;
+        
+    }
+
+    label{
+        font-size: 22px;    
+        margin-right: 10px;
+    }
+
+    select{
+        margin-right: 40px;
+        padding: 7px 10px;
+        border: none;
+        border: 2px solid #000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    select:focus{
+        border: 2px solid steelblue;
+
+    }
+    
+    .viewbtn{
+        background-color: steelblue;
+        border-radius: 10px;
+        color: #fff;
+        margin-left: 78px;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        padding: 10px 10px;
+        cursor: pointer;   
+    }
+
+    .viewbtn:hover{
+        background-color: #000;
+        color: #fff;
+    }
+
+    .newloc {
+        margin-top: 85px;
+    }
+
+    .locations{
+        margin-top: 100px;
+    }
+   
+
+    #locationsList li{
+        display: flex;
+        list-style-type: none;
+     
+        margin-left: 30px;
+        margin-bottom: 10px;
+    }
+
+    #locationsList li:nth-child(1){
+        margin-top: 100px;
+    }
+   
+    .locationImg{
+        margin-right: 50px;
+        object-fit: cover;
+    }
+
+    .locationDes{
+        margin-top: 15px;
+        margin-right: 50px;
+    }
+
+    .delLocation{
+        width: 90px;
+        height: 40px;
+
+        /* background-color: rgb(238, 71, 71); */
+        background: transparent;
+        color: red;
+        border-radius: 20px;
+        border: 1px solid #eee;
+        /* box-shadow: 0 1px 0 1px rgba(0,0,0,0.4); */
+        font-size:15px;
+        margin-top: 10px;
+        margin-left: 10px;
+        cursor: pointer;
+
+        user-select: none;
+    }
+
+    .delLocation:hover{
+        background-color: #000;
+        color: #fff;
+    }
+
+    .editLocation{
+        width: 90px;
+        height: 40px;
+
+        /* background-color: rgb(238, 71, 71); */
+        background: transparent;
+        color: green;
+        border-radius: 20px;
+        border: 1px solid #eee;
+        /* box-shadow: 0 1px 0 1px rgba(0,0,0,0.4); */
+        font-size:15px;
+        margin-top: 10px;
+        margin-left: 5px;
+        cursor: pointer;
+
+        user-select: none;
+    }
+
+    .editLocation:hover{
+        background-color: #000;
+        color: #fff;
+    }
+
+    #addLocationForm{
+        padding-bottom: 30px;
+    }
+
+    #addLocationForm input{
+        height: 28px;
+        border-radius: 3px;
+        margin-left: 10px;
+    }
+
+    #addLocationForm input:focus::placeholder{
+        color: transparent;
+    }
+
+    input{
+        border: 2px solid #000;
+    }
+
+    input:focus{
+        /* border: none; */
+        border-color: steelblue;
+        outline: none;
+       
+    }
+
+
+    #addLocationForm .viewbtn{
+        margin-left: -13px;
+        padding: 10px 15px;
+    }
+</style>
+<body>
+    <h2>Welcome, Admin {{admin_name}} </h2>
+    <a href="/admin/logout"><button class="logoutbtn">Logout</button></a>
+
+    <h3>Manage Locations</h3>
+    
+    <!-- Select Township and Category -->
+    <form id="filterForm">
+        
+            <label for="township">Select Township:</label>
+            <select name="township" id="township">
+                {% for township in townships %}
+                <option value="{{ township }}">{{ township }}</option>
+                {% endfor %}
+             </select>
+      
+
+        
+            <label for="category">Select Category:</label>
+            <select name="category" id="category">
+            {% for category in categories %}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
+            </select>
+        
+
+        <button type="submit" class="viewbtn">View Locations</button>
+    </form>
+
+    <!-- Location List -->
+    <h3 class="locations"></h3>
+    <ul id="locationsList"></ul>
+
+    <!-- Add Location Form -->
+    <h3 class="newloc">Add New Location</h3>
+    <form id="addLocationForm" enctype="multipart/form-data">
+        <input type="text" id="locationName" placeholder="Location Name" required>
+        <input type="text" id="latitude" placeholder="Latitude" required>
+        <input type="text" id="longitude" placeholder="Longitude" required>
+        <input type="text" id="locationAddress" placeholder="Location Address" required>
+        <input type="file" id="locationImage" accept="image/*" required style="border:none;">
+        <button type="submit" class="viewbtn">Add Location</button>
+    </form>
+    
+
+    <!-- Edit Modal Popup -->
+<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+background-color:white; padding:30px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.3); z-index:1000;">
+<h3>Update your Location Name</h3>
+<input type="text" id="editNameInput" placeholder="Enter new name" style="padding:8px; width:90%; font-size:16px;">
+<br><br>
+<button onclick="confirmEdit()" style="padding:8px 20px; background-color:steelblue; color:white; border:none; border-radius:5px; cursor:pointer;">Confirm</button>
+<button onclick="closeEditModal()" style="padding:8px 20px; margin-left:10px; background-color:gray; color:white; border:none; border-radius:5px; cursor:pointer;">Cancel</button>
+</div>
+
+<!-- Modal Overlay -->
+<div id="modalOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+   background-color:rgba(0,0,0,0.5); z-index:999;"></div>
+
+    <script>
+
+        let currentPage = 1;
+        const limit = 5;
+
+        document.getElementById("filterForm").onsubmit = function(e) {
+            e.preventDefault();
+            const township = document.getElementById("township").value;
+            const category = document.getElementById("category").value;
+            fetchLocations(township, category);
+        };
+
+        // function fetchLocations(township, category) {
+        //     fetch(`/locations/${township}/${category}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         const list = document.getElementById("locationsList");
+        //         list.innerHTML = ""; 
+
+        //         data.locations.forEach(loc => {
+        //             // Ensure the ID is correctly set
+        //             const locationId = `location-${township}-${category}-${encodeURIComponent(loc.name)}`;
+        //             const li = document.createElement("li");
+        //             li.id = locationId;  // Set the ID here
+
+        //             li.innerHTML = `
+        //                 <img src="${loc.image}" alt="${loc.name}" width="80px" height="50px" class="locationImg"><br>
+        //                 <div class="locationDes"><strong>${loc.name}</strong> - ${loc.address}</div><br>
+        //                 <button class="delLocation" onclick="deleteLocation('${township}', '${category}', '${loc.name}')">Delete</button>
+        //             `;
+        //             list.appendChild(li);
+        //             console.log(li);
+        //         });
+        //     });
+        // }
+
+        // function fetchLocations(township, category) {
+        //     fetch(`/locations/${township}/${category}`)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         const container = document.getElementById("locationsList");
+
+        //         // Clear previous content
+        //         container.innerHTML = ""; 
+
+        //         // Create a table
+        //         const table = document.createElement("table");
+        //         table.border = "0.3";
+        //         table.style.width = "60%";
+        //         table.style.margin = "30px auto";
+        //         table.style.textAlign = "center";
+
+        //         data.locations.forEach(loc => {
+        //             const row = document.createElement("tr");
+
+        //             row.innerHTML = `
+        //                 <td>
+        //                     <img src="${loc.image}" alt="${loc.name}" width="80px" height="50px" class="locationImg">
+        //                 </td>
+        //                 <td>
+        //                     <strong>${loc.name}</strong><br>
+        //                     ${loc.address}
+        //                 </td>
+        //                 <td>
+        //                     <button class="delLocation" onclick="deleteLocation('${township}', '${category}', '${loc.name}')">Delete</button>
+        //                 </td>
+        //             `;
+
+        //             table.appendChild(row);
+        //         });
+
+        //         // Append the table to the container
+        //         container.appendChild(table);
+        //     });
+        // }
+
+
+function fetchLocations(township, category, page = 1) {
+    fetch(`/locations/${township}/${category}?page=${page}&limit=${limit}`)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("locationsList");
+            container.innerHTML = ""; // Clear previous content
+
+            const table = document.createElement("table");
+            table.border = "0.3";
+            table.style.width = "60%";
+            table.style.margin = "30px auto";
+            table.style.textAlign = "center";
+
+            data.locations.forEach(loc => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td><img src="${loc.image}" alt="${loc.name}" width="80px" height="50px" class="locationImg"></td>
+                    <td><strong class="loc-name">${loc.name}</strong><br>${loc.address}</td>
+                    <td><button class="delLocation" onclick="deleteLocation('${township}', '${category}', '${loc.name}')">🗑</button></td>
+                    <td><button class="editLocation" onclick="editLocation(this, '${township}', '${category}', '${loc.name}')">&#9998;</button></td>
+                    `;
+                table.appendChild(row);
+            });
+
+            container.appendChild(table);
+            createPaginationControls(data.total, page, township, category);
+        });
+}
+
+function createPaginationControls(total, currentPage, township, category) {
+    const totalPages = Math.ceil(total / limit);
+    const pagination = document.createElement("div");
+    pagination.style.textAlign = "center";
+    pagination.style.marginTop = "20px";
+
+    for (let page = 1; page <= totalPages; page++) {
+        const btn = document.createElement("button");
+        btn.textContent = page;
+        btn.style.margin = "0 5px";
+        btn.style.padding = "6px 12px";
+        btn.style.borderRadius = "5px";
+        btn.style.cursor = "pointer";
+        btn.style.border = page === currentPage ? "2px solid steelblue" : "1px solid gray";
+        btn.style.backgroundColor = page === currentPage ? "#ccc" : "#fff";
+
+        btn.onclick = () => {
+            fetchLocations(township, category, page);
+        };
+        pagination.appendChild(btn);
+    }
+
+    document.getElementById("locationsList").appendChild(pagination);
+}
+
+
+        document.getElementById("addLocationForm").onsubmit = function(e) {
+            e.preventDefault();
+            const township = document.getElementById("township").value;
+            const category = document.getElementById("category").value;
+            const name = document.getElementById("locationName").value;
+            const lat = parseFloat(document.getElementById("latitude").value);
+            const lng = parseFloat(document.getElementById("longitude").value);
+            const address = document.getElementById("locationAddress").value;
+            const imageFile = document.getElementById("locationImage").files[0];
+
+            // Create FormData for image upload
+            const formData = new FormData();
+            formData.append("township", township);
+            formData.append("category", category);
+            formData.append("name", name);
+            formData.append("latitude", lat);
+            formData.append("longitude", lng);
+            formData.append("address", address);
+            formData.append("imageFile", imageFile);
+
+            // Method 1
+        //     fetch("/admin/create_location", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ township, category, name, lat, lng, address, imageFile })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         alert(data.message);
+        //         fetchLocations(township, category);
+        //     });
+        // };
+
+        // Method 2
+        fetch("/admin/create_location", {
+                method: "POST",
+                body: formData
+            })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok: " + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(data.message);
+            fetchLocations(township, category);
+        })
+        .catch(error => console.error("Error adding location:", error));
+    }
+
+        function deleteLocation(township, category, name) {
+            if (confirm(`Are you sure you want to delete ${name}?`)) {
+                fetch(`/admin/delete_location/${township}/${category}/${encodeURIComponent(name)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ action: 'delete' })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Location deleted successfully!');
+                        
+                        // Remove the location from the UI
+                        const tableRows = document.querySelectorAll("#locationsList table tr");
+                        tableRows.forEach(row => {
+                        if (row.innerHTML.includes(name)) {
+                            row.remove();
+                        }
+                });
+                    } else {
+                        alert('Error deleting location: ' + data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        let currentEdit = { button: null, township: "", category: "", oldName: "" };
+
+function editLocation(button, township, category, oldName) {
+    // Store current state
+    currentEdit = { button, township, category, oldName };
+
+    // Show modal and overlay
+    document.getElementById("editModal").style.display = "block";
+    document.getElementById("modalOverlay").style.display = "block";
+
+    // Pre-fill current name
+    document.getElementById("editNameInput").value = oldName;
+}
+
+function closeEditModal() {
+    document.getElementById("editModal").style.display = "none";
+    document.getElementById("modalOverlay").style.display = "none";
+}
+
+function confirmEdit() {
+    const newName = document.getElementById("editNameInput").value.trim();
+    const { township, category, oldName } = currentEdit;
+
+    if (!newName) {
+        alert("Name cannot be empty");
+        return;
+    }
+
+    fetch(`/admin/edit_location/${township}/${category}/${encodeURIComponent(oldName)}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ new_name: newName })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Location updated successfully");
+
+            // Refresh locations list
+            fetchLocations(township, category);
+        } else {
+            alert("Failed to update: " + data.message);
+        }
+
+        closeEditModal();
+    })
+    .catch(error => {
+        console.error("Edit error:", error);
+        alert("Something went wrong.");
+        closeEditModal();
+    });
+}
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+ 
+
+    text-align: center;
+
+    position: relative;
+
+    padding:0;
+    margin: 0;
+}
+
+
+h1 {
+    color:  rgb(199, 130, 130);
+    font-weight: 450;
+    word-spacing: 5px;
+    letter-spacing: 3px;
+    text-shadow: 1.3px 1px #000;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+i{
+    color: rgb(199, 130, 130);
+}
+
+/* Township buttons and category list styling */
+.township-buttons, #category-list {
+    margin: 10px;
+}
+
+.twbtn {
+    background-color: #eee;
+    box-shadow: 1px 0.8px 1px 1.5px rgb(199, 130, 130);
+    border-radius: 100px;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .twbtn:hover,button.active {
+    background-color: #000;
+    color: #fff;
+    transform: scale(1.2);
+  }
+
+  
+
+button{
+    margin-left: 30px;
+    margin-right: 50px;
+}
+
+#category-list {  
+    margin: 10px;
+    margin-top: 25px;
+    margin-right:70px;
+    padding: 10px;
+}
+
+#category-list a {
+    font-size: 18px;
+    color: #000;
+    /* background-color: red;; */
+    /* width: 20px; */
+    margin-left: 35px;
+    text-decoration: none;
+    padding: 10px;
+}
+
+
+#category-list a:hover, #category-list a.active {
+    color: steelblue;
+}
+
+#category-list a span {
+    margin-left: 5px;
+}
+
+#map {
+    height: 500px;  /* Adjust this to your preferred height */
+    width: 100%;    /* Make sure the width is 100% of its container */
+    margin-top: 20px;
+}
+
+
+
+.leftlogo{
+    position: absolute;
+    top: -20px;
+    left: 20px;
+}
+
+.logoimg{
+    width:50px;
+    height: 70px;
+}
+/* start topside */
+.topside{
+    /* position:absolute; */
+    z-index:100;
+    opacity: 1;
+
+    position: relative;
+}
+
+.nearest-dropdown{
+    position: fixed;
+    
+    right: 0px;
+    top: 130px;
+}

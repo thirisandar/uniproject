@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearest Route Finder System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+</head>
+<body>
+
+   <div class="leftlogo">
+     <img src="../static/images/mu.jpeg" class="logoimg" />
+   </div>
+   
+   <div class="topside">
+    <h1>Nearest Route Finding System</h1>
+    <ion-icon name="heart"></ion-icon>
+  
+    <!-- Township buttons -->
+    <div class="township-buttons">
+      <button onclick="selectTownship('Maharaungmyay')" class="twbtn">Maharaungmyay</button>
+      <button onclick="selectTownship('Chanmyathazi')" class="twbtn">Chanmyathazi</button>
+      <button onclick="selectTownship('Chanayetharzan')" class="twbtn">Chanayetharzan</button>
+    </div>
+  
+    <!-- Category list -->
+    <div id="category-list">
+      <a href="#" data-category="coffee" onclick="showLocations('coffee')"><i class="fas fa-coffee"></i> Coffee Shops</a>
+      <a href="#" data-category="restaurant" onclick="showLocations('restaurant')"><i class="fas fa-utensils"></i> Restaurants</a>
+      <a href="#" data-category="bookstore" onclick="showLocations('bookstore')"><i class="fas fa-book-open"></i> Book Stores</a>
+      <a href="#" data-category="hotel" onclick="showLocations('hotel')"><i class="fas fa-bed"></i> Hotels</a>
+      <a href="#" data-category="shopping" onclick="showLocations('shopping')"><i class="fas fa-shopping-cart"></i> Shopping Centers</a>
+    </div>
+  
+    <div class="nearest-dropdown">
+      <label for="nearest-select" style="font-weight: bold; font-size:17px;">Choose 3 Nearest Location:</label>
+      <select id="nearest-select" onchange="showNearestLocations()" style="padding: 5px; cursor:pointer;">
+          <option value="">-- Select Category --</option>
+          <option value="coffee">Coffee Shops</option>
+          <option value="restaurant">Restaurants</option>
+          <option value="bookstore">Book Stores</option>
+          <option value="hotel">Hotels</option>
+          <option value="shopping">Shopping Centers</option>
+      </select>
+  </div>
+  </div>
+  
+   
+   
+
+          <!-- Map display -->
+    <div id="map" style="width:90% ;height: 380px; margin-left: 5%;"></div>
+    
+   <!-- Left panel to display location details -->
+  <div id="location-panel" style="position: fixed; top: 40%; left: 20px; width:300px; max-height:50vh; background-color: white; z-index: 1000; padding: 15px; display: none; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+    
+    <button id="close-panel" style="position: absolute; top: -7px; right: -45px;  border: none;  font-size: 32px; font-weight:300; font-weight: bold; background:transparent; color:#000; cursor: pointer; z-index: 200;">×</button>
+
+    <img id="location-image" src="" alt="Location Image" style="width: 100%; height: 180px; margin-top: 20px; border-radius: 8px; object-fit: cover;">
+    
+    <p style="margin-top: 15px; font-size: 16px; color: #222;">
+      <strong>Shop Name:</strong> <span id="location-name" style="font-size:18px;"></span>
+    </p>
+    
+    <!-- Address -->
+    <p style="font-size: 14px; color: #555;">
+      <strong>Shop Address:</strong> <span id="location-address" style="font-size:15px;"></span>
+    </p>
+    <!-- <h3 id="location-name" style="margin: 15px 0 10px 0; font-size: 18px; color: #222;"></h3>
+    
+    <p id="location-address" style="margin: 0 0 10px 0; font-size: 14px; color: #555;"></p> -->
+  </div>
+
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
+
+
+
+<!-- HTML !-->
+
+

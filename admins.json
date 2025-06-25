@@ -1,0 +1,12 @@
+{
+    "admin1": {
+        "name":"Thiri Sandar",
+        "email":"thiris613@gmail.com",
+        "password":"12345678"
+    },
+    "admin2": {
+        "name":"Hla Min Min Myat",
+        "email":"hlaminminmyat570@gmail.com",
+        "password":"12345678"
+    }
+}
