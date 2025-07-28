@@ -526,11 +526,11 @@ def delete_location(township, category, name):
         return jsonify({'status': 'success', 'message': 'Location deleted successfully!'})
     return jsonify({'status': 'error', 'message': 'Location not found or invalid request.'})
 
+import os
+
 if __name__ == '__main__':
     create_admin_table()
     migrate_admins_json_to_db()
     create_location_schema()
-    # app.run(debug=True)
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
-    # pass
+    app.run(host='0.0.0.0', port=port)
