@@ -1,201 +1,58 @@
-# only using openstreet map leaflet.js and haversine() formula
-# import json
-# import math
-# from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-
-# app = Flask(__name__)
-# app.secret_key = "your_secret_key"  # Needed for session management
-
-# # Mandalay University coordinates (starting point)
-# MANDALAY_UNIVERSITY = (21.9743, 96.0895)
-
-# # Paths to JSON files
-# JSON_LOCATIONS_PATH = 'locations.json'
-# JSON_ADMINS_PATH = 'admins.json'
-
-# # Function to calculate distance using Haversine formula
-# def haversine(lat1, lon1, lat2, lon2):
-#     R = 6371  # Radius of the Earth in km
-#     dlat = math.radians(lat2 - lat1)
-#     dlon = math.radians(lon2 - lon1)
-#     a = math.sin(dlat / 2) ** 2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon / 2) ** 2
-#     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-#     distance = R * c
-#     return distance
-
-# # Load admin data
-# def load_admins():
-#     with open(JSON_ADMINS_PATH, 'r') as file:
-#         return json.load(file)
-
-# # Load location data
-# def load_locations():
-#     with open(JSON_LOCATIONS_PATH, 'r') as file:
-#         return json.load(file)
-
-# # Route for the homepage (open for all users)
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
-# # Route to get locations based on township and category
-# @app.route('/locations/<township>/<category>')
-# def locations(township, category):
-#     with open(JSON_LOCATIONS_PATH, 'r') as file:
-#         data = json.load(file)
-
-#     if township not in data or category not in data[township]:
-#         return jsonify({'locations': []})
-
-#     locations = [
-#         {
-#             'name': loc['name'],
-#             'latitude': loc['lat'],
-#             'longitude': loc['lng'],
-#             'address': loc['address'],
-#             'distance': haversine(MANDALAY_UNIVERSITY[0], MANDALAY_UNIVERSITY[1], loc['lat'], loc['lng'])
-#         }
-#         for loc in data[township][category]
-#     ]
-
-#     locations.sort(key=lambda loc: loc['distance'])
-#     return jsonify({'locations': locations})
-
-# # Admin login page
-# @app.route('/admin')
-# def admin_login_page():
-#     if "admin_name" in session:
-#         return redirect(url_for('admin_dashboard'))
-#     return render_template('admin_login.html')
-
-# # Admin login API
-# @app.route('/admin/login', methods=['POST'])
-# def admin_login():
-#     data = request.json
-#     email = data.get("email")
-#     password = data.get("password")
-
-#     admins = load_admins()
-#     for admin in admins.values():
-#         if admin["email"] == email and admin["password"] == password:
-#             session["admin_name"] = admin["name"]
-#             return jsonify({"status": "success", "message": "Login Successful", "admin_name": admin["name"]})
-#     return jsonify({"status": "error", "message": "Invalid credentials.Please try again."}), 401
-
-# # Admin dashboard (only accessible if logged in)
-# @app.route('/admin/dashboard')
-# def admin_dashboard():
-#     if "admin_name" not in session:
-#         return redirect(url_for('admin_login_page'))  # Redirect to login page if not logged in
-    
-#     # Load the location data from the JSON file
-#     data = load_locations()
-
-#     # Extract townships and categories
-#     townships = list(data.keys())  # Get a list of all townships
-#     categories = list({category for township in data.values() for category in township.keys()})  # Get a list of all unique categories
-
-#     return render_template('admin_dashboard.html', townships=townships, categories=categories)
-
-   
-
-# # Logout API
-# @app.route('/admin/logout')
-# def logout():
-#     session.pop("admin_name", None)
-#     return redirect(url_for('admin_login_page'))
-
-# # CRUD operations for locations
-# @app.route('/admin/locations/<township>/<category>', methods=['GET'])
-# def view_locations(township, category):
-#     if "admin_name" not in session:
-#         return redirect(url_for('admin_login_page'))
-
-#     # Load location data from the JSON file
-#     with open(JSON_LOCATIONS_PATH, 'r') as file:
-#         data = json.load(file)
-
-#     # Debugging: Print the loaded data to verify it
-#     print("Loaded data:", data)
-
-#     # Check if the township exists in the data
-#     if township not in data:
-#         return jsonify({"status": "error", "message": f"Township '{township}' not found in the data."}), 404
-
-#     # Check if the category exists in the given township
-#     if category not in data[township]:
-#         return jsonify({"status": "error", "message": f"Category '{category}' not found in township '{township}'."}), 404
-
-#     # Get the locations for the given township and category
-#     locations = data[township][category]
-
-#     # Return the view_locations.html template, passing the locations, township, and category
-#     return render_template('view_locations.html', locations=locations, township=township, category=category)
+def create_location_schema():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.executescript("""
+        CREATE TABLE IF NOT EXISTS township (
+            townshipID INTEGER PRIMARY KEY AUTOINCREMENT,
+            townshipName TEXT NOT NULL UNIQUE,
+            townshipArea REAL,
+            townshipDescription TEXT
+        );
+        CREATE TABLE IF NOT EXISTS category (
+            categoryID INTEGER PRIMARY KEY AUTOINCREMENT,
+            categoryType TEXT NOT NULL UNIQUE,
+            categoryDescription TEXT,
+            categoryQty INTEGER DEFAULT 0
+        );
+        CREATE TABLE IF NOT EXISTS location (
+            locationID INTEGER PRIMARY KEY AUTOINCREMENT,
+            locationName TEXT NOT NULL,
+            locationAddress TEXT,
+            locationLatitude REAL,
+            locationLongitude REAL,
+            townshipID INTEGER NOT NULL,
+            categoryID INTEGER NOT NULL,
+            FOREIGN KEY(townshipID) REFERENCES township(townshipID),
+            FOREIGN KEY(categoryID) REFERENCES category(categoryID)
+        );
+    """)
+    conn.commit()
+    conn.close()
 
 
-# @app.route('/admin/create_location', methods=['POST'])
-# def create_location():
-#     if "admin_name" not in session:
-#         return jsonify({'status': 'error', 'message': 'Unauthorized'}), 403
+JSON_LOCATIONS_PATH = 'locations.json'  # Your JSON file path
 
-#     new_location = request.json
-#     township = new_location['township']
-#     category = new_location['category']
-#     name = new_location['name']
-#     lat = new_location['lat']
-#     lng = new_location['lng']
-#     address = new_location['address']
+def create_admin_table():
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS admin (
+            adminID INTEGER PRIMARY KEY AUTOINCREMENT,
+            adminName TEXT NOT NULL,
+            adminEmail TEXT NOT NULL UNIQUE,
+            adminPassword TEXT NOT NULL
+        )
+    ''')
+    conn.commit()
+    conn.close()
 
-#     data = load_locations()
-
-#     if township not in data:
-#         data[township] = {}
-
-#     if category not in data[township]:
-#         data[township][category] = []
-
-#     data[township][category].append({
-#         'name': name,
-#         'lat': lat,
-#         'lng': lng,
-#         'address':address
-#     })
-
-#     with open(JSON_LOCATIONS_PATH, 'w') as file:
-#         json.dump(data, file, indent=4)
-
-#     return jsonify({'status': 'success', 'message': 'Location added successfully!'})
-
-# @app.route('/admin/delete_location/<township>/<category>/<name>', methods=['POST'])
-# def delete_location(township, category, name):
-#     if "admin_name" not in session:
-#         return jsonify({'status': 'error', 'message': 'Unauthorized'}), 403
-
-#     data = load_locations()
-
-#     if township in data and category in data[township]:
-#         original_length = len(data[township][category])
-#         data[township][category] = [loc for loc in data[township][category] if loc['name'] != name]
-
-#         if len(data[township][category]) == original_length:
-#             return jsonify({'status': 'error', 'message': 'Location not found!'}), 404
-
-#         # Save updated data
-#         with open(JSON_LOCATIONS_PATH, 'w') as file:
-#             json.dump(data, file, indent=4)
-
-#         return jsonify({'status': 'success', 'message': 'Location deleted successfully!'})
-
-#     return jsonify({'status': 'error', 'message': 'Invalid Township or Category!'}), 404
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
 
 
 # dijkstra's algorithm and haversine
 import os
 import json
 import heapq
+import sqlite3
 from math import radians, sin, cos, sqrt, atan2
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from werkzeug.utils import secure_filename  # for file
@@ -208,7 +65,8 @@ app.secret_key = "your_secret_key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
-JSON_LOCATIONS_PATH = "locations.json"
+
+# JSON_LOCATIONS_PATH = "locations.json"
 JSON_ADMINS_PATH = "admins.json"
 MANDALAY_UNIVERSITY = "Mandalay University"
 
@@ -218,11 +76,22 @@ MILES_CONVERSION = 0.000621371
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-def load_locations():
-    with open(JSON_LOCATIONS_PATH, "r", encoding="utf-8") as file:
-        return json.load(file)
+DB_PATH = 'locations.db'  # ✅ Define your DB path
 
-def load_admins():
+def load_locations():
+    try:
+        with open(JSON_LOCATIONS_PATH, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        return data
+    except FileNotFoundError:
+        # Return empty dict if JSON file not found
+        return {}
+    except json.JSONDecodeError:
+        # Handle invalid JSON format gracefully
+        return {}
+   
+
+def load_admin():
     with open(JSON_ADMINS_PATH, "r", encoding="utf-8") as file:
         return json.load(file)
 
@@ -380,8 +249,8 @@ def locations(township, category):
     graph = build_graph(data)
     shortest_paths = dijkstra(graph, MANDALAY_UNIVERSITY)
 
-    def format_time(minutes_float):
-        total_seconds = int(minutes_float * 60)
+    def format_time(hours_float):
+        total_seconds = int(hours_float * 3600)
         mins = total_seconds // 60
         secs = total_seconds % 60
         if mins > 0:
@@ -418,8 +287,8 @@ def locations(township, category):
             continue
         
         distance_km = round(distance_meters / 1000, 2)
-        motorbike_time = format_time((distance_km / 30) * 60)  # 30 km/h motorbike
-        car_time = format_time((distance_km / 45) * 60)         # 45 km/h car
+        motorbike_time = format_time(distance_km / 30)  # 30 km/h motorbike
+        car_time = format_time(distance_km / 45)        # 45 km/h car
 
         results.append({
             'name': name,
@@ -478,38 +347,92 @@ def locations(township, category):
 #     results.sort(key=lambda x: x['distance'])
 #     return jsonify({'locations': results})
 
+def migrate_admins_json_to_db(json_path='admins.json', db_path=DB_PATH):
+    if not os.path.exists(json_path):
+        print(f"[INFO] Skipping admin migration: '{json_path}' not found.")
+        return
+
+    with open(json_path, 'r', encoding='utf-8') as file:
+        admins = json.load(file)
+
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    for admin in admins.values():
+        cursor.execute('''
+            INSERT OR IGNORE INTO admin (adminName, adminEmail, adminPassword)
+            VALUES (?, ?, ?)
+        ''', (admin['name'], admin['email'], admin['password']))
+
+    conn.commit()
+    conn.close()
+    if not os.path.exists(json_path):
+        print(f"[INFO] Skipping admin migration: '{json_path}' not found.")
+        return
+
+    with open(json_path, 'r', encoding='utf-8') as file:
+        admins = json.load(file)
+
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    for admin in admins.values():
+        cursor.execute('''
+            INSERT OR IGNORE INTO admin (adminName, adminEmail, adminPassword)
+            VALUES (?, ?, ?)
+        ''', (admin['name'], admin['email'], admin['password']))
+
+    conn.commit()
+    conn.close()
+
+migrate_admins_json_to_db()
+
 @app.route('/admin')
 def admin_login_page():
-    if "admin_name" in session:
-        return redirect(url_for('admin_dashboard'))
-    return render_template('admin_login.html')
+        if "admin_name" in session:
+            return redirect(url_for('admin_dashboard'))
+        return render_template('admin_login.html')
 
 @app.route('/admin/login', methods=['POST'])
 def admin_login():
     data = request.json
-    email = data.get("email")
+    username_or_email = data.get('username_or_email')
     password = data.get("password")
-    admins = load_admins()
-    for admin in admins.values():
-        if admin["email"] == email and admin["password"] == password:
-            session["admin_name"] = admin["name"]
-            return jsonify({"status": "success", "message": "Login Successful", "admin_name": admin["name"]})
-    return jsonify({"status": "error", "message": "Invalid credentials. Please try again."}), 401
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT adminName FROM admin
+        WHERE (adminEmail = ? OR adminName = ?) AND adminPassword = ?
+    ''', (username_or_email, username_or_email, password))
+    result = cursor.fetchone()
+    conn.close()
+
+    if result:
+        admin_name = result[0]
+        session['admin_name'] = admin_name
+        return jsonify({'status': 'success', 'message': f'Welcome {admin_name}!'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Invalid admin name/email or password'}), 401
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
-    if "admin_name" not in session:
-        return redirect(url_for('admin_login_page'))
-    admin_name = session["admin_name"]
-    data = load_locations()
-    townships = list(data.keys())
-    categories = list({category for township in data.values() for category in township.keys()})
-    return render_template('admin_dashboard.html',admin_name=admin_name ,  townships=townships, categories=categories)
+        if 'admin_name' not in session:
+            return redirect(url_for('admin_login_page'))
+
+        admin_name = session['admin_name']
+        data = load_locations()
+
+        # Extract all townships and categories
+        townships = list(data.keys())
+        categories = list({cat for township in data.values() for cat in township.keys()})
+
+        return render_template('admin_dashboard.html', admin_name=admin_name, townships=townships, categories=categories)
 
 @app.route('/admin/logout')
 def logout():
-    session.pop("admin_name", None)
-    return redirect(url_for('admin_login_page'))
+        session.pop("admin_name", None)
+        return redirect(url_for('admin_login_page'))
 
 
 @app.route('/admin/create_location', methods=['POST'])
@@ -527,12 +450,18 @@ def create_location():
 
     # Handle the file upload
     image_file = request.files['imageFile']
+    # if image_file and allowed_file(image_file.filename):
+    #     filename = secure_filename(image_file.filename)
+    #     image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    #     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    # else:
+    #     image_path = 'default.png'  # Use a default image if no file is uploaded
     if image_file and allowed_file(image_file.filename):
         filename = secure_filename(image_file.filename)
         image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        image_path = f"/{app.config['UPLOAD_FOLDER']}{filename}"  # ✅ FIX HERE
     else:
-        image_path = 'default_image.jpg'  # Use a default image if no file is uploaded
+        image_path = '/static/images/default.png'  # Must be inside your static folder
 
     data = load_locations()
     if township not in data:
@@ -598,4 +527,9 @@ def delete_location(township, category, name):
     return jsonify({'status': 'error', 'message': 'Location not found or invalid request.'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    create_admin_table()
+    migrate_admins_json_to_db()
+    create_location_schema()
+    # app.run(debug=True)
+    from os import getenv
+    app.run(host="0.0.0.0", port=int(getenv("PORT", 5000)))

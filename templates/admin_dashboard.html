@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     <title>Admin Dashboard</title>
 </head>
 <style type="text/css">
@@ -70,26 +75,45 @@
         
     }
 
-    label{
-        font-size: 22px;    
-        margin-right: 10px;
-    }
+    select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f9f9f9;
+    background-image: linear-gradient(45deg, transparent 50%, steelblue 50%),
+                      linear-gradient(135deg, steelblue 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(50% - 3px),
+                         calc(100% - 15px) calc(50% - 3px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 2px solid steelblue;
+    font-size: 16px;
+    font-family: "Roboto Condensed", sans-serif;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    margin-right: 20px;
+    font-family: sans-serif;
+}
 
-    select{
-        margin-right: 40px;
-        padding: 7px 10px;
-        border: none;
-        border: 2px solid #000;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 15px;
-    }
+select:focus {
+    border-color: #000;
+    box-shadow: 0 0 8px #000;
+    outline: none;
+}
 
-    select:focus{
-        border: 2px solid steelblue;
+label {
+    font-size: 23px;
+    margin-right: 10px;
+    font-weight: 600;
+    color: #333;
+    font-family: 'Ariel';
 
-    }
-    
+}
     .viewbtn{
         background-color: steelblue;
         border-radius: 10px;
@@ -216,10 +240,11 @@
     }
 </style>
 <body>
-    <h2>Welcome, Admin {{admin_name}} </h2>
+    <h2>Nearest Route Finding System </h2>
     <a href="/admin/logout"><button class="logoutbtn">Logout</button></a>
 
-    <h3>Manage Locations</h3>
+    <h2>Manage Locations</h2>
+    <br/>
     
     <!-- Select Township and Category -->
     <form id="filterForm">
@@ -248,24 +273,32 @@
     <h3 class="locations"></h3>
     <ul id="locationsList"></ul>
 
+    
     <!-- Add Location Form -->
-    <h3 class="newloc">Add New Location</h3>
+    <h3 class="newloc">Add New Location (Optional) with Default Image
+        
+        
+    </h3>
     <form id="addLocationForm" enctype="multipart/form-data">
         <input type="text" id="locationName" placeholder="Location Name" required>
         <input type="text" id="latitude" placeholder="Latitude" required>
         <input type="text" id="longitude" placeholder="Longitude" required>
         <input type="text" id="locationAddress" placeholder="Location Address" required>
-        <input type="file" id="locationImage" accept="image/*" required style="border:none;">
+        <input type="file" id="locationImage" accept="image/*" style="border:none;">
         <button type="submit" class="viewbtn">Add Location</button>
     </form>
+    <div id="map" style="height: 300px; width: 80%; margin: 20px auto; border-radius: 10px;"></div>
+
     
 
     <!-- Edit Modal Popup -->
 <div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
 background-color:white; padding:30px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.3); z-index:1000;">
-<h3>Update your Location Name</h3>
-<input type="text" id="editNameInput" placeholder="Enter new name" style="padding:8px; width:90%; font-size:16px;">
+<h3>Update your Location Information</h3>
+Location Name<br><br><input type="text" id="editNameInput" placeholder="Enter new name" style="padding:8px; width:90%; font-size:16px;">
 <br><br>
+Street Number<br><input type="text" id="editAddressInput" placeholder="Enter new address" style="padding:8px; width:90%; font-size:16px; margin-top:10px;">
+<br><br/>
 <button onclick="confirmEdit()" style="padding:8px 20px; background-color:steelblue; color:white; border:none; border-radius:5px; cursor:pointer;">Confirm</button>
 <button onclick="closeEditModal()" style="padding:8px 20px; margin-left:10px; background-color:gray; color:white; border:none; border-radius:5px; cursor:pointer;">Cancel</button>
 </div>
@@ -351,6 +384,35 @@ background-color:white; padding:30px; border-radius:10px; box-shadow:0 2px 10px 
         // }
 
 
+// function fetchLocations(township, category, page = 1) {
+//     fetch(`/locations/${township}/${category}?page=${page}&limit=${limit}`)
+//         .then(response => response.json())
+//         .then(data => {
+//             const container = document.getElementById("locationsList");
+//             container.innerHTML = ""; // Clear previous content
+
+//             const table = document.createElement("table");
+//             table.border = "0.3";
+//             table.style.width = "60%";
+//             table.style.margin = "30px auto";
+//             table.style.textAlign = "center";
+
+//             data.locations.forEach(loc => {
+//                 const row = document.createElement("tr");
+//                 row.innerHTML = `
+//                     <td><img src="${loc.image}" alt="${loc.name}" width="80px" height="50px" class="locationImg"></td>
+//                     <td><strong class="loc-name">${loc.name}</strong><br>${loc.address}</td>
+//                     <td><button class="delLocation" onclick="deleteLocation('${township}', '${category}', '${loc.name}')">🗑</button></td>
+//                     <td><button class="editLocation" onclick="editLocation(this, '${township}', '${category}', '${loc.name}')">&#9998;</button></td>
+//                     `;
+//                 table.appendChild(row);
+//             });
+
+//             container.appendChild(table);
+//             createPaginationControls(data.total, page, township, category);
+//         });
+// }
+
 function fetchLocations(township, category, page = 1) {
     fetch(`/locations/${township}/${category}?page=${page}&limit=${limit}`)
         .then(response => response.json())
@@ -358,6 +420,20 @@ function fetchLocations(township, category, page = 1) {
             const container = document.getElementById("locationsList");
             container.innerHTML = ""; // Clear previous content
 
+            // ✅ If no locations found
+            if (!data.locations || data.locations.length === 0) {
+                const message = document.createElement("p");
+                message.textContent = `No ${category}s found in ${township}.`;
+                message.style.textAlign = "center";
+                message.style.fontSize = "20px";
+                message.style.fontWeight = "bold";
+                message.style.marginTop = "50px";
+                message.style.color = "crimson";
+                container.appendChild(message);
+                return;
+            }
+
+            // Normal location display if data exists
             const table = document.createElement("table");
             table.border = "0.3";
             table.style.width = "60%";
@@ -370,8 +446,8 @@ function fetchLocations(township, category, page = 1) {
                     <td><img src="${loc.image}" alt="${loc.name}" width="80px" height="50px" class="locationImg"></td>
                     <td><strong class="loc-name">${loc.name}</strong><br>${loc.address}</td>
                     <td><button class="delLocation" onclick="deleteLocation('${township}', '${category}', '${loc.name}')">🗑</button></td>
-                    <td><button class="editLocation" onclick="editLocation(this, '${township}', '${category}', '${loc.name}')">&#9998;</button></td>
-                    `;
+                    <td><button class="editLocation" onclick="editLocation(this, '${township}', '${category}', '${loc.name}' ,'${loc.address}')">&#9998;</button></td>
+                `;
                 table.appendChild(row);
             });
 
@@ -379,6 +455,7 @@ function fetchLocations(township, category, page = 1) {
             createPaginationControls(data.total, page, township, category);
         });
 }
+
 
 function createPaginationControls(total, currentPage, township, category) {
     const totalPages = Math.ceil(total / limit);
@@ -414,7 +491,6 @@ function createPaginationControls(total, currentPage, township, category) {
             const lat = parseFloat(document.getElementById("latitude").value);
             const lng = parseFloat(document.getElementById("longitude").value);
             const address = document.getElementById("locationAddress").value;
-            const imageFile = document.getElementById("locationImage").files[0];
 
             // Create FormData for image upload
             const formData = new FormData();
@@ -424,7 +500,6 @@ function createPaginationControls(total, currentPage, township, category) {
             formData.append("latitude", lat);
             formData.append("longitude", lng);
             formData.append("address", address);
-            formData.append("imageFile", imageFile);
 
             // Method 1
         //     fetch("/admin/create_location", {
@@ -434,10 +509,53 @@ function createPaginationControls(total, currentPage, township, category) {
         //     })
         //     .then(response => response.json())
         //     .then(data => {
-        //         alert(data.message);
+        //         alert(data.message);s
         //         fetchLocations(township, category);
         //     });
         // };
+
+        const imageInput = document.getElementById("locationImage");
+        const imageFile = imageInput.files[0];
+
+        if (imageFile) {
+            formData.append("imageFile", imageFile);
+        } else {
+            // Use default image if no file selected
+            fetch("/static/images/default.png")
+                .then(res => res.blob())
+                .then(blob => {
+                    const defaultFile = new File([blob], "default.png", { type: "image/png" });
+                    formData.append("imageFile", defaultFile);
+
+                    // Now proceed with fetch
+                    sendLocationData(formData, township, category);
+                })
+                .catch(err => {
+                    console.error("Default image fetch failed", err);
+                    alert("Could not load default image.");
+                });
+            return; // stop here; sendLocationData will be called inside fetch
+        }
+
+
+function sendLocationData(formData, township, category) {
+    fetch("/admin/create_location", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok: " + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message);
+        fetchLocations(township, category);
+    })
+    .catch(error => console.error("Error adding location:", error));
+}
+
 
         // Method 2
         fetch("/admin/create_location", {
@@ -457,40 +575,111 @@ function createPaginationControls(total, currentPage, township, category) {
         .catch(error => console.error("Error adding location:", error));
     }
 
-        function deleteLocation(township, category, name) {
-            if (confirm(`Are you sure you want to delete ${name}?`)) {
-                fetch(`/admin/delete_location/${township}/${category}/${encodeURIComponent(name)}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ action: 'delete' })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('Location deleted successfully!');
+    // Default center point (Mandalay University)
+const map = L.map('map').setView([21.9588, 96.0891], 13);
+
+// Tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Marker placeholder
+let marker;
+
+// Listen for clicks on map
+map.on('click', function (e) {
+    const { lat, lng } = e.latlng;
+
+    // Set the lat/lng fields
+    document.getElementById("latitude").value = lat.toFixed(7);
+    document.getElementById("longitude").value = lng.toFixed(7);
+
+    // Add or update marker
+    if (marker) {
+        marker.setLatLng(e.latlng);
+    } else {
+        marker = L.marker(e.latlng).addTo(map);
+    }
+});
+
+
+        // function deleteLocation(township, category, name) {
+        //     if (confirm(`Are you sure you want to delete ${name}?`)) {
+        //         fetch(`/admin/delete_location/${township}/${category}/${encodeURIComponent(name)}`, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify({ action: 'delete' })
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data.status === 'success') {
+        //                 alert('Location deleted successfully!');
                         
-                        // Remove the location from the UI
-                        const tableRows = document.querySelectorAll("#locationsList table tr");
-                        tableRows.forEach(row => {
+        //                 // Remove the location from the UI
+        //                 const tableRows = document.querySelectorAll("#locationsList table tr");
+        //                 tableRows.forEach(row => {
+        //                 if (row.innerHTML.includes(name)) {
+        //                     row.remove();
+        //                 }
+        //         });
+        //             } else {
+        //                 alert('Error deleting location: ' + data.message);
+        //             }
+        //         })
+        //         .catch(error => console.error('Error:', error));
+        //     }
+        // }
+
+
+        function deleteLocation(township, category, name) {
+    Swal.fire({
+        title: `Delete "${name}"?`,
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/admin/delete_location/${township}/${category}/${encodeURIComponent(name)}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'delete' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire("Deleted!", "Location has been deleted.", "success");
+                    
+                    // Remove from UI
+                    const tableRows = document.querySelectorAll("#locationsList table tr");
+                    tableRows.forEach(row => {
                         if (row.innerHTML.includes(name)) {
                             row.remove();
                         }
-                });
-                    } else {
-                        alert('Error deleting location: ' + data.message);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }
+                    });
+                } else {
+                    Swal.fire("Error", "Failed to delete: " + data.message, "error");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                Swal.fire("Error", "Something went wrong!", "error");
+            });
         }
+    });
+}
 
         let currentEdit = { button: null, township: "", category: "", oldName: "" };
 
-function editLocation(button, township, category, oldName) {
+function editLocation(button, township, category, oldName,oldAddress) {
     // Store current state
-    currentEdit = { button, township, category, oldName };
+    currentEdit = { button, township, category, oldName , oldAddress};
 
     // Show modal and overlay
     document.getElementById("editModal").style.display = "block";
@@ -498,6 +687,8 @@ function editLocation(button, township, category, oldName) {
 
     // Pre-fill current name
     document.getElementById("editNameInput").value = oldName;
+    document.getElementById("editAddressInput").value = oldAddress;
+
 }
 
 function closeEditModal() {
@@ -507,27 +698,40 @@ function closeEditModal() {
 
 function confirmEdit() {
     const newName = document.getElementById("editNameInput").value.trim();
+    const newAddress = document.getElementById("editAddressInput").value.trim();
+
     const { township, category, oldName } = currentEdit;
 
-    if (!newName) {
-        alert("Name cannot be empty");
+    if (!newName || !newAddress) {
+        alert("Name and Street No cannot be empty");
         return;
     }
 
     fetch(`/admin/edit_location/${township}/${category}/${encodeURIComponent(oldName)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ new_name: newName })
+        body: JSON.stringify({ new_name: newName ,new_address: newAddress})
     })
     .then(res => res.json())
     .then(data => {
         if (data.status === "success") {
-            alert("Location updated successfully");
+            // alert("Location updated successfully");
+             Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Location updated successfully!'
+            });
 
             // Refresh locations list
             fetchLocations(township, category);
         } else {
-            alert("Failed to update: " + data.message);
+            // alert("Failed to update: " + data.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to update: ' + data.message
+            });
+
         }
 
         closeEditModal();
