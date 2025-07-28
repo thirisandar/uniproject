@@ -531,6 +531,6 @@ if __name__ == '__main__':
     migrate_admins_json_to_db()
     create_location_schema()
     # app.run(debug=True)
-    from os import getenv
-    app.run(host="0.0.0.0", port=int(getenv("PORT", 5000)))
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
     # pass
