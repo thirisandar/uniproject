@@ -168,12 +168,20 @@ function showLocations(category) {
 
 // Function to calculate and display the route
 function calculateRoute(startCoords, endCoords, marker, location) {
+    // Replace with your real API key
+    const GRAPH_HOPPER_API_KEY = '636686d6-9a1f-4972-8dfa-940799ac5b37';
     // Create the route control using Leaflet Routing Machine
     currentRoute = L.Routing.control({
         waypoints: [
             L.latLng(startCoords), // Start: Mandalay University coordinates
             L.latLng(endCoords)    // End: Location coordinates
         ],
+        router: new L.Routing.GraphHopper(GRAPH_HOPPER_API_KEY, {
+            vehicle: 'car',
+            urlParameters: {
+                locale: 'en',
+            }
+        }),
         routeWhileDragging: true,  // Optional: allows the user to drag the route to change it
         createMarker: function() { return null; }  // Prevent marker creation along the route
     }).addTo(map);
@@ -191,7 +199,27 @@ function calculateRoute(startCoords, endCoords, marker, location) {
             <p>Motorbike: ${location.motorbike_time} </p>
             <p>Car: ${location.car_time} </p>
         `).openPopup();
+
+          // Update direction box
+          const directionBox = document.getElementById("direction-box");
+          const routeSummary = document.getElementById("route-summary");
+          const routeInstructions = document.getElementById("route-instructions");
+  
+          routeSummary.innerHTML = `<strong>Total Distance:</strong> ${distanceKm} km &nbsp; | &nbsp; <strong>Estimated Time:</strong> ${timeMin} min`;
+          routeInstructions.innerHTML = ''; // Clear old instructions
+  
+          // Add step-by-step directions
+          route.instructions.forEach(instr => {
+              const li = document.createElement('li');
+              li.textContent = instr.text;
+              routeInstructions.appendChild(li);
+          });
+  
+          directionBox.style.display = 'block';
+        
     });
+
+    
 }
 
 

@@ -56,6 +56,15 @@
           <!-- Map display -->
     <div id="map" style="width:90% ;height: 380px; margin-left: 5%;"></div>
     
+       <!-- Direction Box -->
+    <div id="direction-box" style="width: 90%;margin: 20px auto;background-color: #f9f9f9;border-left: 6px solid #007bff;padding: 20px;border-radius: 10px;font-family: Arial, sans-serif;box-shadow: 0 4px 8px rgba(0,0,0,0.1);display: none;">
+      <h2 style="margin-top: 0; color: #007bff;">Direction Box</h2>
+      <div id="route-summary" style="margin-bottom: 10px; font-weight: bold;"></div>
+      <ol id="route-instructions" style="padding-left: 20px; line-height: 1.6;"></ol>
+  </div>
+
+  <h1>TESTING MAP PAGE</h1>
+
    <!-- Left panel to display location details -->
   <div id="location-panel" style="position: fixed; top: 40%; left: 20px; width:300px; max-height:50vh; background-color: white; z-index: 1000; padding: 15px; display: none; overflow-y: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
     
@@ -81,6 +90,8 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Leaflet Routing Machine JS -->
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <!-- graphhopper js -->
+    <script src="https://unpkg.com/leaflet-routing-graphhopper@1.2.0/dist/leaflet-routing-graphhopper.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
